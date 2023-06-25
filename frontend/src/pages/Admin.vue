@@ -30,7 +30,7 @@
               <td>{{ item.title }}</td>
               <td>{{ item.hit ? "Да" : "Нет" }}</td>
               <td>{{ item?.discount ? item.discount + "%" : "" }}</td>
-              <td><img :src="item?.image" class="item-image" /></td>
+              <td><img :src="`https://api.oboidagestan.ru/${item?.image}`" class="item-image" /></td>
               <td>{{ item?.category }}</td>
               <td>{{ item?.subtitle }}</td>
               <td>{{ item?.oldprice }}</td>
@@ -60,10 +60,15 @@ const page = ref(1);
 
 async function getProducts() {
   await axios
-    .get("http://localhost:8001/api/products/", {
+    .get("https://api.oboidagestan.ru/api/products/", {
       headers: { Authorization: localStorage.getItem("token") },
       params: {
-        page: page.value
+        page: page.value,
+        sort: [], 
+        filter: [],
+        price: [null, null],
+        search: ''
+    
       }
     })
     .then((data) => {

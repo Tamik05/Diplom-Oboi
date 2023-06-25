@@ -27,7 +27,7 @@ const password = ref("");
 const error = ref('');
 
 async function submit() {
-  await axios.post("http://localhost:8001/api/user/auth", {
+  await axios.post("https://api.oboidagestan.ru/api/user/auth", {
     login: login.value,
     password: password.value,
   }).then((data) => {

@@ -117,15 +117,15 @@ import Layout from "../components/Layout.vue";
 
 const title = ref("");
 const discount = ref();
-const category = ref(null);
-const subtitle = ref(null);
-const oldprice = ref(null);
-const price = ref(null);
-const style = ref(null);
-const country = ref(null);
-const color = ref(null);
+const category = ref();
+const subtitle = ref();
+const oldprice = ref();
+const price = ref();
+const style = ref();
+const country = ref();
+const color = ref();
 const hit = ref(false);
-const error = ref(null);
+const error = ref();
 
 const image = ref(null);
 
@@ -154,7 +154,7 @@ async function addProduct() {
   data.append("discount", discount.value);
   data.append("category", category.value);
   data.append("subtitle", subtitle.value);
-  data.append("oldprice", oldprice.value ?? null);
+  data.append("oldprice", oldprice.value);
   data.append("price", price.value);
   data.append("style", style.value);
   data.append("country", country.value);
@@ -163,8 +163,17 @@ async function addProduct() {
   data.append("img", image.value);
 
   error.value = "";
-  console.log(data);
-  await axios.post("http://localhost:8001/api/products", data, { headers: { Authorization: localStorage.getItem("token") } });
+  
+  await axios.post(
+    "https://api.oboidagestan.ru/api/products", 
+    data, 
+    { 
+      headers: 
+      { 
+        Authorization: localStorage.getItem("token") 
+      } 
+    }
+  );
 }
 </script>
 

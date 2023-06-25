@@ -96,7 +96,7 @@ import Pagination from "../components/Pagination.vue";
 
 import { onMounted, ref, watch } from "vue";
 import axios from "axios";
-import { onBeforeRouteUpdate } from "vue-router";
+import { onBeforeRouteUpdate, onBeforeRouteLeave } from "vue-router";
 
 const currentPage = ref(1);
 const paginatedData = ref();
@@ -112,7 +112,7 @@ const search = ref();
 const filters = ref([]);
 
 async function getProducts() {
-  const data = await axios.get("http://localhost:8001/api/products", {
+  const data = await axios.get("https://api.oboidagestan.ru/api/products", {
     params: { 
       page: currentPage.value, 
       sort: JSON.stringify(sort.value), 
@@ -212,11 +212,8 @@ onMounted(() => {
     });
   });
 });
-
-onBeforeRouteUpdate(() => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const searchQuery = urlParams.get('search')
-
+onBeforeRouteUpdate((to, from, next) => {
+  const searchQuery = to.query.search;
   if(searchQuery && searchQuery !== search.value) {
     search.value = searchQuery;
     getProducts();

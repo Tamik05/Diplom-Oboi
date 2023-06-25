@@ -52,7 +52,6 @@
 
 <script setup>
 import { onMounted, onUpdated, ref, watch } from "vue";
-import { onBeforeRouteUpdate } from "vue-router";
 import { Slide, Menu } from 'vue3-burger-menu'
 import router from "../router";
 

@@ -15,7 +15,7 @@
                         @delete-item="getCart"
                      />
                 </div>
-                <div class="create-order">
+                <div class="create-order" v-if="cartItems.length">
                     <button class="button"><a target="_blank" href="https://wa.me/890000000">Купить</a></button>
                 </div>
             </div>

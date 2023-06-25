@@ -3,7 +3,7 @@
     <div class="hit-card__content">
       <a class="hit-card__img" href="#">
         <img
-        :src="image"
+        :src="`https://api.oboidagestan.ru/${image}`"
         alt="Продукт"
         />
         <div class="category" v-if="category">{{ category }}</div>

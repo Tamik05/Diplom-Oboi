@@ -1,7 +1,7 @@
 <template>
   <div class="cart-item">
     <div class="image">
-      <img :src="image" alt="" />
+      <img :src="`https://api.oboidagestan.ru/${image}`" alt="" />
       <div class="text-wrapper">
         <span class="title">{{ title }}</span>
         <span class="price">{{ price }}</span>
