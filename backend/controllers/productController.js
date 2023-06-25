@@ -13,6 +13,15 @@ const admin = (token) => {
   return user.role;
 };
 
+const returnIfNull = (req, field) => {
+  /* проверка , имеется ли значение в поле */
+  if(typeof(undefined) === req.body[field]) {
+    return null;
+  }
+  return req.body[field]
+  
+}
+
 class ProductController {
   async create(req, res, next) {
     try {
@@ -21,20 +30,20 @@ class ProductController {
       const { img } = req.files;
       const fileName = uuid.v4() + '.jpg';
       
-      await img.mv(path.resolve(__dirname, '..', 'static', fileName))
-
+      await img.mv(path.resolve(__dirname, '..', 'static', fileName));
+      
       const product = await Product.create({
         hit,
-        discount: req.body?.discount ?? null,
+        discount: returnIfNull(req, 'discount'),
         category,
         title,
         image: fileName,
-        subtitle: req.body?.subtitle ?? null,
-        oldprice: req.body?.oldprice ?? null,
+        subtitle: returnIfNull(req, 'subtitle'),
+        oldprice: returnIfNull(req, 'oldprice'),
         price,
-        style: req.body?.style ?? null,
-        color: req.body?.color ?? null,
-        country: req.body?.country ?? null,
+        style: returnIfNull(req, 'style'),
+        color: returnIfNull(req, 'color'),
+        country: returnIfNull(req, 'country'),
       });
       return res.status(200).json(product);
     } catch (err) {
